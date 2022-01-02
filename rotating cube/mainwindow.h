@@ -9,6 +9,7 @@
 #include <QTimer>
 #include <QVector>
 #include <QMessageBox>
+#include <QWheelEvent>
 
 #include "point3.h"
 #include "ui_mainwindow.h"
@@ -28,14 +29,16 @@ public:
     void updateSlot();
     QVector<QVector<float>> matmul(QVector<QVector<float>> a, QVector<QVector<float>> b);
     QLineF connectEdge(int i, int j);
+    void wheelEvent(QWheelEvent *event);
 private:
     Ui::MainWindow *ui;
 
     Point3 *points[8];
-    float angle = 0.0;
-    float xoff = 300;
-    float yoff = 200;
+    float fTheta = 0.0;
+    float xoff = 300; // this.width / 2
+    float yoff = 200; // this.height / 2
     float scale = 100;
+    float distance = 1.4;
 
     Point3 *projected[8];
 };
