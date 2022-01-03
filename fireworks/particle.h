@@ -7,7 +7,8 @@
 
 class Particle {
 public:
-    Particle(float x, float y, bool firework);
+    Particle(float x, float y);
+    Particle(float x, float y, int type);
     void updatePosition();
     void applyForce(QPointF force);
     QPointF getPosition();
@@ -20,8 +21,9 @@ private:
     bool firework = false;
     float lifespan;
     QPointF mult;
+    float lifespanDeclineMultiple;
 
-    QRandomGenerator rand;
+    QRandomGenerator *rand = new QRandomGenerator;
 };
 
 #endif // PARTICLE_H

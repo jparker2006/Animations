@@ -1,13 +1,15 @@
 #include "firework.h"
 
-Firework::Firework() {
-    this->firework = new Particle(rand.global()->bounded(0, 800), 600, false);
+Firework::Firework(int type) {
+    this->firework = new Particle(rand.global()->bounded(25, 775), 600);
     this->bExploded = false;
     this->color = QColor(
-        rand.global()->bounded(0, 255),
-        rand.global()->bounded(0, 255),
-        rand.global()->bounded(0, 255)
+        rand.global()->bounded(70, 255),
+        rand.global()->bounded(70, 255),
+        rand.global()->bounded(70, 255)
     );
+    this->stroke = rand.global()->bounded(2, 5);
+    this->type = type;
 }
 
 bool Firework::update() { // return true if its a firework post explode
@@ -37,14 +39,13 @@ QPointF Firework::show(int index) {
     if (this->bExploded)
         return this->vParticles[index]->getPosition();
 
-    return QPointF(-10, -10);
+    return QPointF(-10, -10); // should never hit
 }
 
 void Firework::explode() {
-    for (int i=0; i<100; i++) {
-        QPointF topPos = this->firework->getPosition();
-        Particle *p = new Particle(topPos.x(), topPos.y(), true);
-        this->vParticles.push_back(p);
+    for (int i=0; i<rand.global()->bounded(75, 350); i++) {
+        QPointF apex = this->firework->getPosition();
+        this->vParticles.push_back(new Particle(apex.x(), apex.y(), this->type));
     }
 }
 
@@ -57,10 +58,6 @@ QColor Firework::getColor() {
     return this->color;
 }
 
-
-
-
-
-
-
-
+int Firework::getStroke() {
+    return this->stroke;
+}

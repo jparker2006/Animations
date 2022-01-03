@@ -27,10 +27,8 @@ public:
     virtual void paintEvent(QPaintEvent *event);
 private:
     Ui::MainWindow *ui;
-
     QVector<Firework*> fireworks;
-    // QPointF gravity = QPointF(0, 0.2);
-
     QRandomGenerator rand;
+    int typeCounter;
 };
 #endif // MAINWINDOW_H

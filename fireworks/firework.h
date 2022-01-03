@@ -9,13 +9,14 @@
 
 class Firework {
 public:
-    Firework();
+    Firework(int type);
     QPointF show();
     void explode();
     bool update();
     QVector<Particle *> getParticleArray();
     QPointF show(int index);
     QColor getColor();
+    int getStroke();
 private:
     Particle *firework;
 
@@ -24,6 +25,8 @@ private:
     bool bExploded;
     QVector<Particle*> vParticles;
     QColor color;
+    int stroke;
+    int type;
 };
 
 #endif // FIREWORK_H
